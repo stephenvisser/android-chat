@@ -50,3 +50,8 @@ App
  * Add permissions in manifest
 2. Custom Application
  * Point Manifest to Application
+3. Update Manifest Permissions
+4. Rename MainActivity to Chat
+5. Fill in Chat
+6. SafeAsyncTask
+7. Push

@@ -112,3 +112,41 @@ Use IntelliJ refactoring for strings.xml
     }
 
 9. Point out pitfalls of AsyncTask. Refactor with [SafeAsyncTask](https://github.com/roboguice/roboguice/blob/master/roboguice/src/main/java/roboguice/util/SafeAsyncTask.java).
+
+Push
+=====
+1. Application
+
+    PushService.setDefaultPushCallback(this, Chat.class);
+
+2. AndroidManifest.xml under manifest
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:protectionLevel="signature"
+        android:name="com.andmobility.permission.C2D_MESSAGE" />
+
+    <uses-permission android:name="com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" />
+
+2. AndroidManifest.xml under application
+
+    <service android:name="com.parse.PushService"/>
+    <receiver android:name="com.parse.ParseBroadcastReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.USER_PRESENT"/>
+      </intent-filter>
+    </receiver>
+    <receiver android:name="com.parse.GcmBroadcastReceiver"
+        android:permission="com.google.android.c2dm.permission.SEND">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+        <category android:name="com.andmobility"/>
+      </intent-filter>
+    </receiver>
