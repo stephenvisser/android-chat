@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,6 +65,13 @@ public class Chat extends ListActivity implements View.OnClickListener {
     obj.put("text", text.toString());
     try {
       obj.save();
+
+      // push to subscribers
+      ParsePush push = new ParsePush();
+      push.setChannel(App.CHAT_CHANNEL);
+      push.setMessage(text.toString());
+      push.sendInBackground();
+
       text.clear();
       fetch();
     } catch (ParseException e) {
