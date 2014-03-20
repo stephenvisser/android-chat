@@ -44,3 +44,9 @@ Components
 
 App
 ===
+1. [Add Parse](https://parse.com/docs/downloads)
+ * Add jar
+ * Point build.gradle to the jar folder
+ * Add permissions in manifest
+2. Custom Application
+ * Point Manifest to Application

@@ -12,6 +12,7 @@
   <permission android:protectionLevel="signature"
       android:name="com.andmobility.permission.C2D_MESSAGE"/>
   <uses-permission android:name="com.andmobility.permission.C2D_MESSAGE"/>
+
   <application
       android:allowBackup="true"
       android:icon="@drawable/ic_launcher"

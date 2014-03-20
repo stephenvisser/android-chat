@@ -4,5 +4,9 @@
   <string name="app_name">Chat</string>
   <string name="hello_world">Hello world!</string>
   <string name="action_settings">Settings</string>
+  <string name="send">Send</string>
+  <string name="required_text">Required Text</string>
+  <string name="loading_title">Loading</string>
+  <string name="loading_text">Loading Messages From Parse</string>
 
 </resources>
