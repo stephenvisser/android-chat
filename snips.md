@@ -10,6 +10,10 @@ Application
     defaultACL.setPublicReadAccess(true);
     ParseACL.setDefaultACL(defaultACL, true);
 
+AndroidManifest
+===============
+  <uses-permission android:name="android.permission.INTERNET" />
+
 Activity
 ========
 Use IntelliJ refactoring for strings.xml

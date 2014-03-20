@@ -6,16 +6,15 @@ import com.parse.ParseACL;
 import com.parse.ParseUser;
 import com.parse.PushService;
 
-/**
- * Created by visser on 2014-03-15.
- */
 public class App extends Application {
+  private static final String APP_ID = "87V5OF80WEIyxVCEh9kTPY9Gnq9BP0peg9f3fSQO";
+  private static final String CLIENT_KEY = "KQvkkLhWwvZxk5H2MUoPLbftPpZP13VYS1bZ2Zkj";
 
   @Override
   public void onCreate() {
     super.onCreate();
-    Parse.initialize(this, "87V5OF80WEIyxVCEh9kTPY9Gnq9BP0peg9f3fSQO",
-        "KQvkkLhWwvZxk5H2MUoPLbftPpZP13VYS1bZ2Zkj");
+
+    Parse.initialize(this, APP_ID, CLIENT_KEY);
     PushService.setDefaultPushCallback(this, Chat.class);
 
     ParseUser.enableAutomaticUser();
