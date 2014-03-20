@@ -34,19 +34,51 @@ Use IntelliJ refactoring for strings.xml
 
 3. Global Variables - Use Intellij's generators
 
-4. fetch()
+4. sendMessage
+
+  @Override public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.button:
+        sendMessage();
+        break;
+    }
+  }
+
+  void sendMessage() {
+    Editable text = editText.getText();
+
+    if (TextUtils.isEmpty(text)) {
+      Toast.makeText(this, R.string.required_text, Toast.LENGTH_LONG).show();
+      editText.setError(getString(R.string.required_text));
+      return;
+    } else {
+      editText.setError(null);
+    }
+
+    ParseObject obj = new ParseObject("Message");
+    obj.put("text", text.toString());
+    try {
+      obj.save();
+      text.clear();
+      fetch();
+    } catch (ParseException e) {
+      Log.e(LOGTAG, "uh oh", e);
+    }
+  }
+
+5. fetch()
 
     void fetch() {
       new FetchMessagesTask().execute();
     }
 
-5. FetchMessagesTask onPreExecute
+6. FetchMessagesTask onPreExecute
 
     Chat.this.progressDialog = ProgressDialog.show(Chat.this, getString(R.string.loading_title),
             getString(R.string.loading_text), true);
     super.onPreExecute();
 
-6. FetchMessagesTask onPostExecute
+7. FetchMessagesTask onPostExecute
 
     @Override protected void onPostExecute(List<String> messages) {
         super.onPostExecute(messages);
@@ -57,7 +89,7 @@ Use IntelliJ refactoring for strings.xml
         Chat.this.progressDialog.dismiss();
     }
 
-7. FetchMessagesTask doInBackground
+8. FetchMessagesTask doInBackground
     @Override protected List<String> doInBackground(Void... params) {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Message");
         query.orderByDescending("_created_at");
@@ -74,3 +106,5 @@ Use IntelliJ refactoring for strings.xml
             return Collections.emptyList();
         }
     }
+
+9. Point out pitfalls of AsyncTask. Refactor with [SafeAsyncTask](https://github.com/roboguice/roboguice/blob/master/roboguice/src/main/java/roboguice/util/SafeAsyncTask.java).
